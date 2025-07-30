@@ -13,8 +13,6 @@ class script(object):
     HELP_TXT = """<b>ʏᴏᴜ ᴅᴏɴ'ᴛ ɴᴇᴇᴅ ᴍᴀɴʏ ᴄᴏᴍᴍᴇɴᴛs ᴛᴏ ᴜsᴇ ᴛʜɪs ʙᴏᴛ \n\nᴊᴜsᴛ sᴇɴᴅ ᴍᴇ ғɪʟᴇs ᴀɴᴅ I ᴡɪʟʟ ɢɪᴠᴇ ʏᴏᴜ ᴅɪʀᴇᴄᴛ ʙᴏᴡɴʟᴏᴀᴅ & sᴛʀᴇᴀᴍɪɴɢ ʟɪɴᴋ\n\nᴀʟsᴏ ʏᴏᴜ ᴄᴀɴ ᴜsᴇ ᴍᴇ ɪɴ ʏᴏᴜʀ ᴄʜᴀɴɴᴇʟ ᴊᴜsᴛ ᴀᴅᴅ ᴍᴇ ᴀɴᴅ ᴍᴀᴋᴇ ᴍᴇ ᴀᴅᴍɪɴ ᴀɴᴅ sᴇᴇ ᴍʏ ᴘᴏᴡᴇʀ 💥\n\nғᴏʀ ᴍᴏʀᴇ, ᴜꜱᴇ /help ᴄᴏᴍᴍᴀɴᴅ\nᴍᴏʀᴇ, ᴜꜱᴇ /about ᴄᴏᴍᴍᴀɴᴅ</b>"""
     
     ADMIN_CMD_TXT = """<b>
-    
-Olay aman vishwakarma ne add Kiya hai 
   
 # Admin Only Commands 👑  
 /ban - Ban a user/channel [FOR ADMINS USE ONLY]  
@@ -31,7 +29,7 @@ Olay aman vishwakarma ne add Kiya hai
 /remove_premium - Remove premium access [ADMINS ONLY]
 /premium_user - All premium user [ADMINS ONLY]</b>"""
 
-    HELP2_TXT = """<b>Hᴏᴡ ᴛᴏ Uꜱᴇ Fɪʟᴇ ᴛᴏ Lɪɴᴋ Bᴏᴛ
+    HELP2_TXT = """<b>Hᴏᴡ ᴛᴏ Uꜱᴇ Fɪʟᴇ ᴛᴏ Lɪɴᴋ Pʀɪᴍᴇ Bᴏᴛ
 
 Bᴀꜱɪᴄ Uꜱᴀɢᴇ:
 • Sᴇɴᴅ ᴀɴʏ ғɪʟᴇ ᴏʀ ᴍᴇᴅɪᴀ ғʀᴏᴍ Tᴇʟᴇɢʀᴀᴍ
@@ -63,7 +61,7 @@ Cʜᴀɴɴᴇʟ Uꜱᴀɢᴇ:
 • Uᴘᴅᴀᴛᴇꜱ: @PrimeXBots
 • Sᴜᴘᴘᴏʀᴛ: @PRIME_SUPPORT_GROUP
 
- <u><i>ʀᴇᴘᴏʀᴛ ʙᴜɢs ᴛᴏ  <a href='https://t.me/Prime_Admin_Support_ProBot'>ᴅᴇᴠᴇʟᴏᴘᴇʀ</a></u></i></b>"""
+<u><i>ʀᴇᴘᴏʀᴛ ʙᴜɢs ᴛᴏ  <a href='https://t.me/Prime_Admin_Support_ProBot'>ᴅᴇᴠᴇʟᴏᴘᴇʀ ᴍʀ.ᴘʀɪᴍᴇ</a></u></i></b>"""
 
     CAPTION = """🎬 <i><a href='{}'>{}</a></i>"""
     
@@ -77,9 +75,9 @@ Nᴀᴍᴇ - {}</b>"""
 ║┣⪼🤖ᴍʏ ɴᴀᴍᴇ : {}
 ║┣⪼👦ᴅᴇᴠᴇʟᴏᴘᴇʀ : <a href='https://t.me/Prime_Nayem'>ᴍʀ.ᴘʀɪᴍᴇ</a>
 ║┣⪼❣️ᴜᴘᴅᴀᴛᴇ : <a href=https://t.me/PrimeXBots>ᴘʀɪᴍᴇXʙᴏᴛs</a>
-║┣⪼❣️ꜱᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ : <a href=https://t.me/AV_BOTz_UPDATE>ᴘʀɪᴍᴇ ꜱᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ</a>
+║┣⪼📬ꜱᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ : <a href=https://t.me/Prime_Support_Group>ᴘʀɪᴍᴇ ꜱᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ</a>
 ║┣⪼⏲️ʙᴏᴛ ᴜᴘᴛɪᴍᴇ :- {}
-║┣⪼📡Hᴏsᴛᴇᴅ ᴏɴ : ᴋᴏʏᴇʙ 
+║┣⪼📡Hᴏsᴛᴇᴅ ᴏɴ : ᴀᴅᴠᴀɴᴄᴇ sᴇʀᴠᴇʀ 
 ║┣⪼🗣️ʟᴀɴɢᴜᴀɢᴇ : ᴘʏᴛʜᴏɴ 
 ║┣⪼📚ʟɪʙʀᴀʀʏ : ᴘʏʀᴏɢʀᴀᴍ
 ║┣⪼🗒️ᴠᴇʀsɪᴏɴ : {} [sᴛᴀʙʟᴇ]
