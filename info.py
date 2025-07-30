@@ -11,23 +11,23 @@ API_HASH = environ.get('API_HASH', 'd927c13beaaf5110f5b7c071273')  # Telegram AP
 BOT_TOKEN = environ.get('BOT_TOKEN', '672782:AAE3VrD2SewKmu6ytwU4H1vRtfc')  # Telegram Bot Token
 
 # 👑, Channels & Logs
-BIN_CHANNEL = int(environ.get("BIN_CHANNEL", '-1001973960964'))  # File storage channel
-LOG_CHANNEL = int(environ.get("LOG_CHANNEL", '-1002110971750'))  # General log channel
-PREMIUM_LOGS = int(environ.get("PREMIUM_LOGS", '-1002227216574'))  # Premium user actions log
-VERIFIED_LOG = int(environ.get('VERIFIED_LOG', '-1002227216574'))  # Verified user actions log
-SUPPORT_GROUP = int(environ.get("SUPPORT_GROUP", "-1002028053413"))
+BIN_CHANNEL = int(environ.get("BIN_CHANNEL", '-1002525477015'))  # File storage channel
+LOG_CHANNEL = int(environ.get("LOG_CHANNEL", '-1002152618409'))  # General log channel
+PREMIUM_LOGS = int(environ.get("PREMIUM_LOGS", '-1002152618409'))  # Premium user actions log
+VERIFIED_LOG = int(environ.get('VERIFIED_LOG', '-1002152618409'))  # Verified user actions log
+SUPPORT_GROUP = int(environ.get("SUPPORT_GROUP", "-1002395758041"))
 
 # add admin IDs 11111 2222 3333 and add auth channel IDs -100XXX -100XXX -100XXX
-ADMINS = list(map(int, environ.get('ADMINS', '5977931010').split()))  # List of admin user IDs
-AUTH_CHANNEL = list(map(int, environ.get("AUTH_CHANNEL", "-1002102037760 -1002012150170").split()))  # Allowed channels for authorization
+ADMINS = list(map(int, environ.get('ADMINS', '').split()))  # List of admin user IDs
+AUTH_CHANNEL = list(map(int, environ.get("AUTH_CHANNEL", "-1002043502363 -1002323796637").split()))  # Allowed channels for authorization
 
 # username add without @
-OWNER_USERNAME = environ.get("OWNER_USERNAME", 'BOT_OWNER26')  # Owner's username
-BOT_USERNAME = environ.get("BOT_USERNAME", 'AV_F2L_BOT')  # Bot's username
+OWNER_USERNAME = environ.get("OWNER_USERNAME", 'Prime_Nayem')  # Owner's username
+BOT_USERNAME = environ.get("BOT_USERNAME", 'File_To_Link_Prime_Bot')  # Bot's username
 
 # 🔗 Channel & Support Links
-CHANNEL = environ.get('CHANNEL', 'https://t.me/AV_BOTz_UPDATE')  # Updates channel
-SUPPORT = environ.get('SUPPORT', 'https://t.me/AV_SUPPORT_GROUP')  # Support group
+CHANNEL = environ.get('CHANNEL', 'https://t.me/PrimeXBots')  # Updates channel
+SUPPORT = environ.get('SUPPORT', 'https://t.me/Prime_SUPPORT_GROUP')  # Support group
 HOW_TO_VERIFY = environ.get('HOW_TO_VERIFY', 'https://t.me/')  # Verification guide link
 HOW_TO_OPEN = environ.get('HOW_TO_OPEN', 'https://t.me/')  # File access guide link
 
@@ -84,10 +84,10 @@ else:
 
 # 🌐 Server Settings
 PORT = int(getenv('PORT', '2626'))  # Port for web server
-NO_PORT = str(getenv("NO_PORT", True)).lower() in ("true", "1", "yes")  # Disable port in URL
-HAS_SSL = str(getenv("HAS_SSL", True)).lower() in ("true", "1", "yes")  # Use HTTPS if True
+NO_PORT = str(getenv("NO_PORT", False)).lower() in ("true", "1", "yes")  # Disable port in URL
+HAS_SSL = str(getenv("HAS_SSL", False)).lower() in ("true", "1", "yes")  # Use HTTPS if True
 BIND_ADDRESS = getenv("WEB_SERVER_BIND_ADDRESS", "127.0.0.1")  # Server bind address
-FQDN = getenv("FQDN", "av-bo-tz.vercel.app/") or BIND_ADDRESS  # Full domain name or fallback to bind address
+FQDN = getenv("FQDN", "") or BIND_ADDRESS  # Full domain name or fallback to bind address
 PORT_SEGMENT = "" if NO_PORT else f":{PORT}"  # Port in URL if not disabled
 PROTOCOL = "https" if HAS_SSL else "http"  # Protocol for URL
 URL = f"{PROTOCOL}://{FQDN}{PORT_SEGMENT}"  # Final generated base URL
