@@ -34,8 +34,9 @@ app = Flask(__name__)
 
 @app.route('/file/<int:file_id>')
 def file_page(file_id):
-    return render_template("file_page.html", forwarded_id=file_id)
-
+    file_link = f"https://t.me/File_To_Link_Prime_Bot?start=file_{file_id}"
+    return render_template("file_page.html", file_id=file_id, file_link=file_link)
+    
 ppath = "plugins/*.py"
 files = glob.glob(ppath)
 Webavbot.start()
