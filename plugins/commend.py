@@ -20,6 +20,7 @@ BATCH_FILES = {}
 
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
+    await message.react(emoji="🔥", big=True)
     user_id = message.from_user.id
     mention = message.from_user.mention
     me2 = (await client.get_me()).mention
@@ -31,6 +32,8 @@ async def start(client, message):
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT.format(me2, user_id, mention))
     if len(message.command) == 1 or message.command[1] == "start":
         buttons = [[
+	    InlineKeyboardButton('➕ 𝗔𝗗𝗗 𝗠𝗘 𝗧𝗢 𝗬𝗢𝗨𝗥 𝗖𝗛𝗔𝗡𝗡𝗘𝗟 ➕', url='http://t.me/File_To_Link_Prime_Bot?startchannel=true')
+        ],[
             InlineKeyboardButton('〄 ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ 〄', url=CHANNEL),
             InlineKeyboardButton('✪ ꜱᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ ✪', url=SUPPORT)
         ], [
@@ -40,6 +43,10 @@ async def start(client, message):
             InlineKeyboardButton('✧ ᴄʀᴇᴀᴛᴏʀ ✧', url="https://t.me/Prime_Nayem")
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
+	m = await message.reply_sticker("CAACAgUAAxkBAAEBHsJnlRzxX8727obKStoAAczGV5EIGiwAAn0ZAAJKepFUmtCTESphePUeBA")
+        await asyncio.sleep(3)
+        await m.delete()
+	    
         await message.reply_photo(
             photo=PICS,
             caption=script.START_TXT.format(message.from_user.mention, BOT_USERNAME),
@@ -170,7 +177,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await query.message.delete()
     elif query.data == "about":
         buttons = [[
-	    InlineKeyboardButton('💻 sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ', callback_data='source_prime')
+	    InlineKeyboardButton('💻 sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ', callback_data="source_prime")
 	],[
             InlineKeyboardButton('• ʜᴏᴍᴇ •', callback_data='start'),
 	    InlineKeyboardButton('• ᴄʟᴏsᴇ •', callback_data='close_data')
@@ -185,6 +192,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
     
     elif query.data == "start":
         buttons = [[
+	    InlineKeyboardButton('➕ 𝗔𝗗𝗗 𝗠𝗘 𝗧𝗢 𝗬𝗢𝗨𝗥 𝗖𝗛𝗔𝗡𝗡𝗘𝗟 ➕', url='http://t.me/File_To_Link_Prime_Bot?startchannel=true')
+        ],[
             InlineKeyboardButton('〄 ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ 〄', url=CHANNEL),
 	    InlineKeyboardButton('✪ ꜱᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ ✪', url=SUPPORT)
         ],[
@@ -390,7 +399,7 @@ async def source_info_callback(client, callback_query):
         ]),
         parse_mode=enums.ParseMode.HTML
     )
-    await callback_query.answer()
+    return await callback_query.answer()
 
 
 @Client.on_message(filters.private & filters.command("files"))
@@ -446,7 +455,7 @@ async def delete_files_list(client, message):
 @Client.on_message(filters.command("about"))
 async def about(client, message):
     buttons = [[
-       InlineKeyboardButton('💻 sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ', callback_data='source_prime')
+       InlineKeyboardButton('💻 sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ', callback_data="source_prime")
     ],[
        InlineKeyboardButton('• ᴄʟᴏsᴇ •', callback_data='close_data')
     ]]
