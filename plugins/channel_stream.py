@@ -10,7 +10,7 @@ from database.users_db import db
 from pyrogram.errors import FloodWait
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 
-@Client.on_message(filters.channel & (filters.document | filters.video) & ~filters.forwarded, group=-1)
+@Client.on_message(filters.channel & (filters.document | filters.video) & ~filters.forwarded & ~filters.photo, group=-1)
 async def channel_receive_handler(bot: Client, broadcast: Message):
     try:
         chat_id = broadcast.chat.id
