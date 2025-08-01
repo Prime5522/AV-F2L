@@ -64,10 +64,18 @@
       <a onclick="shareButton()" class="btn btn-danger w-100 mb-3" style="border: none; background-color: {{ colours.share.background }}; color: {{ colours.share.color }};">
         <i class="fa fa-share-alt"></i> Share Now
       </a>
-      <a href="{{ file_link }}" target="_blank" class="btn btn-primary w-100 mb-2">
-    • ɢᴇᴛ ғɪʟᴇ •
+      <a id="get-file-btn" href="#" target="_blank" class="btn btn-info w-100 mb-3" style="border: none; background-color: #17a2b8; color: white;">
+        <i class="fa fa-file"></i> Get File
       </a>
 
+        <script>
+          // 👉 Replace this with your actual file ID dynamically
+          const fileId = {{ forwarded_id }};  // example: 12345
+          const botUsername = "File_To_Link_Prime_Bot";  // Your bot username
+
+  // Set link for Get File button
+         document.getElementById("get-file-btn").href = `https://t.me/${botUsername}?start=file_${fileId}`;
+       </script>
       
       <div class="card bg-dark text-light border-secondary mb-4" style="background-color: {{ colours.file_information.background }}  !important; color: {{ colours.file_information.color }}  !important;">
         <div class="card-header border-secondary">
