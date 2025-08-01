@@ -32,7 +32,7 @@ async def start(client, message):
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT.format(me2, user_id, mention))
     if len(message.command) == 1 or message.command[1] == "start":
         buttons = [[
-	    InlineKeyboardButton('➕ 𝗔𝗗𝗗 𝗠𝗘 𝗧𝗢 𝗬𝗢𝗨𝗥 𝗖𝗛𝗔𝗡𝗡𝗘𝗟 ➕', url='http://t.me/File_To_Link_Prime_Bot?startchannel=true')
+            InlineKeyboardButton('➕ 𝗔𝗗𝗗 𝗠𝗘 𝗧𝗢 𝗬𝗢𝗨𝗥 𝗖𝗛𝗔𝗡𝗡𝗘𝗟 ➕', url='http://t.me/File_To_Link_Prime_Bot?startchannel=true')
         ],[
             InlineKeyboardButton('〄 ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ 〄', url=CHANNEL),
             InlineKeyboardButton('✪ ꜱᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ ✪', url=SUPPORT)
@@ -44,16 +44,16 @@ async def start(client, message):
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
 
-	m = await message.reply_sticker("CAACAgUAAxkBAAEBHsJnlRzxX8727obKStoAAczGV5EIGiwAAn0ZAAJKepFUmtCTESphePUeBA")
-	await asyncio.sleep(3)
-	await m.delete()
-	
-	await message.reply_photo(
-		photo=PICS,
-		caption=script.START_TXT.format(message.from_user.mention, BOT_USERNAME),
-		reply_markup=reply_markup
-	)
-	return
+        m = await message.reply_sticker("CAACAgUAAxkBAAEBHsJnlRzxX8727obKStoAAczGV5EIGiwAAn0ZAAJKepFUmtCTESphePUeBA")
+        await asyncio.sleep(3)
+        await m.delete()
+
+        await message.reply_photo(
+            photo=PICS,
+            caption=script.START_TXT.format(message.from_user.mention, BOT_USERNAME),
+            reply_markup=reply_markup
+        )
+        return
 
     # ✅ Handle /start file_<id>
     msg = message.command[1]
