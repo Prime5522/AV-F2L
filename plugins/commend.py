@@ -43,16 +43,17 @@ async def start(client, message):
             InlineKeyboardButton('✧ ᴄʀᴇᴀᴛᴏʀ ✧', url="https://t.me/Prime_Nayem")
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
+
 	m = await message.reply_sticker("CAACAgUAAxkBAAEBHsJnlRzxX8727obKStoAAczGV5EIGiwAAn0ZAAJKepFUmtCTESphePUeBA")
-        await asyncio.sleep(3)
-        await m.delete()
-	    
-        await message.reply_photo(
-            photo=PICS,
-            caption=script.START_TXT.format(message.from_user.mention, BOT_USERNAME),
-            reply_markup=reply_markup
-        )
-        return
+	await asyncio.sleep(3)
+	await m.delete()
+	
+	await message.reply_photo(
+		photo=PICS,
+		caption=script.START_TXT.format(message.from_user.mention, BOT_USERNAME),
+		reply_markup=reply_markup
+	)
+	return
 
     # ✅ Handle /start file_<id>
     msg = message.command[1]
