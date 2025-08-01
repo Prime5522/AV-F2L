@@ -31,13 +31,13 @@ async def start(client, message):
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT.format(me2, user_id, mention))
     if len(message.command) == 1 or message.command[1] == "start":
         buttons = [[
-            InlineKeyboardButton('• ᴜᴘᴅᴀᴛᴇᴅ •', url=CHANNEL),
-            InlineKeyboardButton('• sᴜᴘᴘᴏʀᴛ •', url=SUPPORT)
+            InlineKeyboardButton('〄 ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ 〄', url=CHANNEL),
+            InlineKeyboardButton('✪ ꜱᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ ✪', url=SUPPORT)
         ], [
-            InlineKeyboardButton('• ʜᴇʟᴘ •', callback_data='help'),
-            InlineKeyboardButton('• ᴀʙᴏᴜᴛ •', callback_data='about')
+            InlineKeyboardButton('〆 ʜᴇʟᴘ 〆', callback_data='help'),
+            InlineKeyboardButton('〆 ᴀʙᴏᴜᴛ 〆', callback_data='about')
         ],[
-            InlineKeyboardButton('✨ ʙᴜʏ ꜱᴜʙꜱᴄʀɪᴘᴛɪᴏɴ : ʀᴇᴍᴏᴠᴇ ᴀᴅꜱ ✨', callback_data="premium_info")
+            InlineKeyboardButton('✧ ᴄʀᴇᴀᴛᴏʀ ✧', url="https://t.me/Prime_Nayem")
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
@@ -170,7 +170,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await query.message.delete()
     elif query.data == "about":
         buttons = [[
-	    InlineKeyboardButton('💻 sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ', url='https://github.com/Botsthe/AV-FILE-TO-LINK-PRO.git')
+	    InlineKeyboardButton('💻 sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ', callback_data='source_prime')
 	],[
             InlineKeyboardButton('• ʜᴏᴍᴇ •', callback_data='start'),
 	    InlineKeyboardButton('• ᴄʟᴏsᴇ •', callback_data='close_data')
@@ -185,13 +185,13 @@ async def cb_handler(client: Client, query: CallbackQuery):
     
     elif query.data == "start":
         buttons = [[
-            InlineKeyboardButton('• ᴜᴘᴅᴀᴛᴇᴅ •', url=CHANNEL),
-	    InlineKeyboardButton('• sᴜᴘᴘᴏʀᴛ •', url=SUPPORT)
+            InlineKeyboardButton('〄 ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ 〄', url=CHANNEL),
+	    InlineKeyboardButton('✪ ꜱᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ ✪', url=SUPPORT)
         ],[
-            InlineKeyboardButton('• ʜᴇʟᴘ •', callback_data='help'),
-            InlineKeyboardButton('• ᴀʙᴏᴜᴛ •', callback_data='about')
+            InlineKeyboardButton('〆 ʜᴇʟᴘ 〆', callback_data='help'),
+            InlineKeyboardButton('〆 ᴀʙᴏᴜᴛ 〆', callback_data='about')
         ],[
-            InlineKeyboardButton('✨ ʙᴜʏ ꜱᴜʙꜱᴄʀɪᴘᴛɪᴏɴ : ʀᴇᴍᴏᴠᴇ ᴀᴅꜱ ✨', callback_data="premium_info")
+            InlineKeyboardButton('✧ ᴄʀᴇᴀᴛᴏʀ ✧', url="https://t.me/Prime_Nayem")
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
@@ -370,6 +370,26 @@ async def cb_handler(client: Client, query: CallbackQuery):
             pass
         await query.answer("✅ Fɪʟᴇ ᴅᴇʟᴇᴛᴇᴅ ꜱᴜᴄᴄᴇꜱꜱғᴜʟʟʏ!", show_alert=True)
         await query.message.edit_text("🗑️ Fɪʟᴇ ʜᴀꜱ ʙᴇᴇɴ ᴅᴇʟᴇᴛᴇᴅ ꜱᴜᴄᴄᴇꜱꜱғᴜʟʟʏ.")
+
+
+@Client.on_callback_query(filters.regex("source_prime"))
+async def source_info_callback(client, callback_query):
+    await callback_query.message.reply_photo(
+        photo="https://i.postimg.cc/hvFZ93Ct/file-000000004188623081269b2440872960.png",  # ইচ্ছামতো ছবির লিংক দিন
+        caption=(
+            "**ɴᴏᴛᴇ :**\n\n"
+            "⚠️ ᴛʜɪꜱ ʙᴏᴛ ɪꜱ ᴀɴ ᴘʀɪᴠᴀᴛᴇ ꜱᴏᴜʀᴄᴇ ᴘʀᴏᴊᴇᴄᴛ\n\n"
+	    "ᴛʜɪs ʙᴏᴛ ʜᴀs ʟᴀsᴛᴇsᴛ ᴀɴᴅ ᴀᴅᴠᴀɴᴄᴇᴅ ꜰᴇᴀᴛᴜʀᴇs⚡️\n\n"
+	    "▸ ᴅᴏɴ'ᴛ ᴡᴏʀʀʏ\n▸ ɪꜰ ʏᴏᴜ ᴡᴀɴᴛ ʟɪᴋᴇ ᴛʜɪꜱ ʙᴏᴛ ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ..!\n▸ ɪ ᴡɪʟʟ ᴄʀᴇᴀᴛᴇ ᴀ ʙᴏᴛ ꜰᴏʀ ʏᴏᴜ"
+            "⇒ ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ - <a href='https://t.me/Prime_Admin_Support_ProBot'>♚ ᴀᴅᴍɪɴ ♚</a>"
+        ),
+        reply_markup=InlineKeyboardMarkup([
+            [InlineKeyboardButton("♚ ᴀᴅᴍɪɴ ♚", url="https://t.me/Prime_Admin_Support_ProBot")],  # এখানে আপনার টেলিগ্রাম ইউজারনেম দিন
+            [InlineKeyboardButton('• ᴄʟᴏsᴇ •', callback_data='close_data')]
+        ])
+    )
+    await callback_query.answer()
+    
 	
 
 @Client.on_message(filters.private & filters.command("files"))
@@ -425,7 +445,7 @@ async def delete_files_list(client, message):
 @Client.on_message(filters.command("about"))
 async def about(client, message):
     buttons = [[
-       InlineKeyboardButton('💻 sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ', url='https://github.com/Botsthe/AV-FILE-TO-LINK-PRO.git')
+       InlineKeyboardButton('💻 sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ', callback_data='source_prime')
     ],[
        InlineKeyboardButton('• ᴄʟᴏsᴇ •', callback_data='close_data')
     ]]
