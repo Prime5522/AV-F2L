@@ -70,7 +70,7 @@ async def render_page(id: str, secure_hash: str, src: str = None) -> str:
         return "Template Error"
 
     # Step 6: Prepare file name safely
-    file_name = file_data.file_name.replace("_", " ") if file_data.file_name else f"AV_File_{id}.mkv"
+    file_name = file_data.file_name.replace("_", " ") if file_data.file_name else f"PrimeXBots_{id}.mkv"
 
     # Step 7: Render template with values
     return template.render(
