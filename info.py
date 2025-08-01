@@ -4,11 +4,11 @@ from typing import Set, Optional, List, Dict
 from Script import script  # Custom script file with caption & other settings
 
 # 🚀 Bot Session and Token Information
-SESSION = environ.get('SESSION', 'Webavbot')  # Pyrogram client session name
+SESSION = environ.get('SESSION', 'PrimeXBots')  # Pyrogram client session name
 
-API_ID = int(environ.get('API_ID', '12300656'))  # Telegram API ID
-API_HASH = environ.get('API_HASH', 'd927c13beaaf5110f5b7c071273')  # Telegram API Hash
-BOT_TOKEN = environ.get('BOT_TOKEN', '672782:AAE3VrD2SewKmu6ytwU4H1vRtfc')  # Telegram Bot Token
+API_ID = int(environ.get('API_ID', ''))  # Telegram API ID
+API_HASH = environ.get('API_HASH', '')  # Telegram API Hash
+BOT_TOKEN = environ.get('BOT_TOKEN', '')  # Telegram Bot Token
 
 # 👑, Channels & Logs
 BIN_CHANNEL = int(environ.get("BIN_CHANNEL", '-1002525477015'))  # File storage channel
@@ -19,7 +19,7 @@ SUPPORT_GROUP = int(environ.get("SUPPORT_GROUP", "-1002395758041"))
 
 # add admin IDs 11111 2222 3333 and add auth channel IDs -100XXX -100XXX -100XXX
 ADMINS = list(map(int, environ.get('ADMINS', '').split()))  # List of admin user IDs
-AUTH_CHANNEL = list(map(int, environ.get("AUTH_CHANNEL", "-1002043502363 -1002323796637").split()))  # Allowed channels for authorization
+AUTH_CHANNEL = list(map(int, environ.get("AUTH_CHANNEL", "-1002245813234 -1002323796637").split()))  # Allowed channels for authorization
 
 # username add without @
 OWNER_USERNAME = environ.get("OWNER_USERNAME", 'Prime_Nayem')  # Owner's username
@@ -43,12 +43,12 @@ PUBLIC_FILE_STORE = environ.get('PUBLIC_FILE_STORE', True)  # Public or private 
 BATCH_PROTECT_CONTENT = environ.get('BATCH_PROTECT_CONTENT', False)  # Batch file protection
 
 # 🔗 Shortlink Configuration
-SHORTLINK_URL = environ.get('SHORTLINK_URL', 'techvjlink.site')  # Shortener site
-SHORTLINK_API = environ.get('SHORTLINK_API', 'd73e70a35dc3877fa14afbf51fa8ec312c94780c')  # API key for shortlink
+SHORTLINK_URL = environ.get('SHORTLINK_URL', '')  # Shortener site
+SHORTLINK_API = environ.get('SHORTLINK_API', '')  # API key for shortlink
 
 # 💾 MongoDB Connection Information
-DB_URL = environ.get('DATABASE_URI', "mongodb+srv://aman:aman@cluster0p1.mongodb.net/?rites=truity&appName=Cluster0")  # MongoDB connection URI
-DB_NAME = environ.get('DATABASE_NAME', "cluster0")  # MongoDB database name
+DB_URL = environ.get('DATABASE_URI', "")  # MongoDB connection URI
+DB_NAME = environ.get('DATABASE_NAME', "Cluster0")  # MongoDB database name
 
 # 📸 all Media (Images)
 QR_CODE = environ.get('QR_CODE', 'https://graph.org/file/6afb4093d5ec5c4176979.jpg')  # QR Code image
