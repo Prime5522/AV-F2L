@@ -28,15 +28,7 @@ from web.server.clients import initialize_clients
 #This Repo Is By @BOT_OWNER26 
 # For Any Kind Of Error Ask Us In Support Group @AV_SUPPORT_GROUP
 
-from flask import Flask, render_template
 
-app = Flask(__name__)
-
-@app.route('/file/<int:file_id>')
-def file_page(file_id):
-    file_link = f"https://t.me/File_To_Link_Prime_Bot?start=file_{file_id}"
-    return render_template("file_page.html", file_id=file_id, file_link=file_link)
-    
 ppath = "plugins/*.py"
 files = glob.glob(ppath)
 Webavbot.start()
