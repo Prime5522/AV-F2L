@@ -28,6 +28,14 @@ from web.server.clients import initialize_clients
 #This Repo Is By @BOT_OWNER26 
 # For Any Kind Of Error Ask Us In Support Group @AV_SUPPORT_GROUP
 
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/file/<int:file_id>')
+def file_page(file_id):
+    return render_template("file_page.html", forwarded_id=file_id)
+
 ppath = "plugins/*.py"
 files = glob.glob(ppath)
 Webavbot.start()
