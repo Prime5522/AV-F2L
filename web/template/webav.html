@@ -64,18 +64,7 @@
       <a onclick="shareButton()" class="btn btn-danger w-100 mb-3" style="border: none; background-color: {{ colours.share.background }}; color: {{ colours.share.color }};">
         <i class="fa fa-share-alt"></i> Share Now
       </a>
-      <a id="get-file-btn" href="#" target="_blank" class="btn btn-info w-100 mb-3" style="border: none; background-color: #17a2b8; color: white;">
-        <i class="fa fa-file"></i> Get File
-      </a>
-
-        <script>
-          // 👉 Replace this with your actual file ID dynamically
-          const fileId = {{ forwarded_id }};  // example: 12345
-          const botUsername = "File_To_Link_Prime_Bot";  // Your bot username
-
-  // Set link for Get File button
-         document.getElementById("get-file-btn").href = `https://t.me/${botUsername}?start=file_${fileId}`;
-       </script>
+      
       
       <div class="card bg-dark text-light border-secondary mb-4" style="background-color: {{ colours.file_information.background }}  !important; color: {{ colours.file_information.color }}  !important;">
         <div class="card-header border-secondary">
@@ -123,13 +112,13 @@
       const title = document.title;
       navigator.share({
         title: title,
-        text: "You can watch high-quality videos on this Stream page, one of the most powerful streaming platforms.\n\n" + title + "\n",
+        text: "ʏᴏᴜ ᴄᴀɴ ᴡᴀᴛᴄʜ ʜɪɢʜ-Qᴜᴀʟɪᴛʏ ᴠɪᴅᴇᴏꜱ ᴏɴ ᴛʜɪꜱ ꜱᴛʀᴇᴀᴍ ᴘᴀɢᴇ, ᴏɴᴇ ᴏꜰ ᴛʜᴇ ᴍᴏꜱᴛ ᴘᴏᴡᴇʀꜰᴜʟ ꜱᴛʀᴇᴀᴍɪɴɢ ᴘʟᴀᴛꜰᴏʀᴍꜱ.\n\n" + title + "\n",
         url: url
       })
-      .then(() => console.log("Thanks for sharing!"))
+      .then(() => console.log("ᴛʜᴀɴᴋꜱ ꜰᴏʀ ꜱʜᴀʀɪɴɢ!"))
       .catch(e => console.log(`Couldn't share because of ${e.message}`));
     } else {
-      alert("Sorry, sharing isn't supported in this browser. Try Google Chrome or copy the link manually.");
+      alert("ꜱᴏʀʀʏ, ꜱʜᴀʀɪɴɢ ɪꜱɴ'ᴛ ꜱᴜᴘᴘᴏʀᴛᴇᴅ ɪɴ ᴛʜɪꜱ ʙʀᴏᴡꜱᴇʀ. ᴛʀʏ ɢᴏᴏɢʟᴇ ᴄʜʀᴏᴍᴇ ᴏʀ ᴄᴏᴘʏ ᴛʜᴇ ʟɪɴᴋ ᴍᴀɴᴜᴀʟʟʏ.");
     }
   }
 
@@ -269,3 +258,4 @@
 
   </html>
           
+
