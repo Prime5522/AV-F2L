@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>PrimeXBots | {{file_name}}</title>
+  <title>PʀɪᴍᴇXBᴏᴛꜱ | {{file_name}}</title>
   <link rel="icon" href="https://cdn.jsdelivr.net/gh/Botsthe/DATABASE@main/image/logo.png" type="image/x-icon">
   <meta name="description" content="Stream high-quality videos and movies in 1080p. Experience seamless playback with multiple player options." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,7 +32,7 @@
     <main class="flex-grow-1 container py-3">
       <div class="player-wrapper mb-3">
         <video id="myVideo" src="{{file_url}}" class="w-100" controls>
-          Your browser does not support the video tag.
+          ʏᴏᴜʀ ʙʀᴏᴡꜱᴇʀ ᴅᴏᴇꜱ ɴᴏᴛ ꜱᴜᴘᴘᴏʀᴛ ᴛʜᴇ ᴠɪᴅᴇᴏ ᴛᴀɢ.
         </video>
         <script src="https://cdn.plyr.io/3.6.12/plyr.js"></script>
       </div>
@@ -57,7 +57,8 @@
         </div>
       </div>
       
-      <a id="demo4" onclick="showLinkModal('{{tg_button}}')" class="btn btn-warning w-100 mb-2" style="border: none; background-color: {{ colours.create_link.background }}; color: {{ colours.create_link.color }};">
+
+      <a href="https://t.me/File_To_Link_Prime_Bot?start=start" target="_blank" class="btn btn-warning w-100 mb-2" style="border: none; background-color: {{ colours.create_link.background }}; color: {{ colours.create_link.color }};">
         <i class="fa-brands fa-telegram"></i> Create Like This Link
       </a>
       
@@ -111,13 +112,13 @@
       const title = document.title;
       navigator.share({
         title: title,
-        text: "You can watch high-quality videos on this Stream page, one of the most powerful streaming platforms.\n\n" + title + "\n",
+        text: "ʏᴏᴜ ᴄᴀɴ ᴡᴀᴛᴄʜ ʜɪɢʜ-Qᴜᴀʟɪᴛʏ ᴠɪᴅᴇᴏꜱ ᴏɴ ᴛʜɪꜱ ꜱᴛʀᴇᴀᴍ ᴘᴀɢᴇ, ᴏɴᴇ ᴏꜰ ᴛʜᴇ ᴍᴏꜱᴛ ᴘᴏᴡᴇʀꜰᴜʟ ꜱᴛʀᴇᴀᴍɪɴɢ ᴘʟᴀᴛꜰᴏʀᴍꜱ.\n\n" + title + "\n",
         url: url
       })
-      .then(() => console.log("Thanks for sharing!"))
+      .then(() => console.log("ᴛʜᴀɴᴋꜱ ꜰᴏʀ ꜱʜᴀʀɪɴɢ!"))
       .catch(e => console.log(`Couldn't share because of ${e.message}`));
     } else {
-      alert("Sorry, sharing isn't supported in this browser. Try Google Chrome or copy the link manually.");
+      alert("ꜱᴏʀʀʏ, ꜱʜᴀʀɪɴɢ ɪꜱɴ'ᴛ ꜱᴜᴘᴘᴏʀᴛᴇᴅ ɪɴ ᴛʜɪꜱ ʙʀᴏᴡꜱᴇʀ. ᴛʀʏ ɢᴏᴏɢʟᴇ ᴄʜʀᴏᴍᴇ ᴏʀ ᴄᴏᴘʏ ᴛʜᴇ ʟɪɴᴋ ᴍᴀɴᴜᴀʟʟʏ.");
     }
   }
 
@@ -204,7 +205,7 @@
     const icon = document.createElement("i");
     icon.className = "fa-solid fa-robot me-2";
 
-    const text = document.createTextNode("Made with by MR.PRIME");
+    const text = document.createTextNode("ᴍᴀᴅᴇ ʙʏ ᴍʀ.ᴘʀɪᴍᴇ ᴡɪᴛʜ PʀɪᴍᴇXBᴏᴛꜱ.<br>© ᴀʟʟ ʀɪɢʜᴛ ʀᴇᴄᴇɪᴠᴇᴅ @PʀɪᴍᴇXBᴏᴛꜱ");
     const devIcon = document.createElement("i");
     devIcon.className = "fa-solid fa-laptop-code dev-icon";
 
@@ -259,4 +260,5 @@
 </body>
 
 </html>
+
 
