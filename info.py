@@ -54,7 +54,7 @@ DB_NAME = environ.get('DATABASE_NAME', "Cluster0")  # MongoDB database name
 QR_CODE = environ.get('QR_CODE', 'https://graph.org/file/6afb4093d5ec5c4176979.jpg')  # QR Code image
 VERIFY_IMG = environ.get("VERIFY_IMG", "https://graph.org/file/1669ab9af68eaa62c3ca4.jpg")  # Verify success image
 AUTH_PICS = environ.get('AUTH_PICS', 'https://i.postimg.cc/xdkd1h4m/IMG-20250715-153124-952.jpg')  # Auth step image
-PICS = environ.get('PICS', 'https://i.postimg.cc/63xj7M3P/file-000000005490622f8ebd1923db1e8209.png')  # Default info image
+PICS = environ.get('PICS', 'https://i.postimg.cc/134GMFZk/IMG-20251004-051155-088.jpg')  # Default info image
 FILE_PIC = environ.get('FILE_PIC', 'https://i.postimg.cc/6QsdjT26/IMG-20250801-181926-877.jpg') # file image 
 
 # 📝 File Captions
