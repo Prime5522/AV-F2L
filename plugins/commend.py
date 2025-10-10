@@ -16,6 +16,7 @@ import logging
 logger = logging.getLogger(__name__)
 BATCH_FILES = {}
 
+
 # ----------------------------------------------------------------------------------
 # Helper Function: ফাইল পাঠানো এবং স্বয়ংক্রিয়ভাবে ডিলিট করার জন্য
 # ----------------------------------------------------------------------------------
@@ -43,15 +44,15 @@ async def send_and_schedule_deletion(client, chat_id, file_id):
             protect_content=PROTECT_CONTENT
         )
         
-        # ২. সতর্কীকরণ বার্তা পাঠান
+        # ২. সতর্কীকরণ বার্তা (বাংলা ও ইংরেজি)
         warning_text = """
-⚠️ 𝐍𝐨𝐭𝐢𝐜𝐞 | বিজ্ঞপ্তি ⚠️
+⚠️ **Notice | বিজ্ঞপ্তি** ⚠️
 
-🕒 Tʜɪs ғɪʟᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ ɪɴ 10 ᴍɪɴs.
-🕒 এই ফাইলটি 10 ᴍɪɴs এর মধ্যে স্বয়ংক্রিয়ভাবে মুছে যাবে।
+🕒 This file will be automatically deleted in **10 minutes**.
+🕒 এই ফাইলটি **১০ মিনিটের** মধ্যে স্বয়ংক্রিয়ভাবে মুছে যাবে।
 
-📤 Pʟᴇᴀsᴇ sᴀᴠᴇ ᴏʀ sʜᴀʀᴇ ᴏʀ ғᴏʀᴡᴀʀᴅ ɪᴛ sᴏᴍᴇᴡʜᴇʀᴇ ᴇʟsᴇ.
-📤 মুছে যাওয়ার আগে অনুগ্রহ করে এটি অন্য কোথাও শেয়ার বা ফরোয়ার্ড করে রাখুন।
+📤 Please save or forward it somewhere else before it gets deleted.
+📤 মুছে যাওয়ার আগে অনুগ্রহ করে এটি অন্য কোথাও সেভ বা ফরোয়ার্ড করে রাখুন।
 """
         warning_message = await client.send_message(
             chat_id=chat_id,
@@ -68,17 +69,15 @@ async def send_and_schedule_deletion(client, chat_id, file_id):
             message_ids=[file_message.id, warning_message.id]
         )
         
-        # ৫. ডিলিট হওয়ার পর চূড়ান্ত বার্তা এবং বাটন পাঠান
+        # ৫. চূড়ান্ত বার্তা এবং বাটন (বাংলা ও ইংরেজি)
         final_message_text = """
-⏳ **সময় শেষ | Time's Up!** ⏳
+⏳ **Time's Up! | সময় শেষ!** ⏳
 
-আপনার অনুরোধ করা ফাইলটির মেয়াদ শেষ হয়ে যাওয়ায় এটি স্বয়ংক্রিয়ভাবে মুছে ফেলা হয়েছে।
-The temporary file you requested has been automatically deleted as its validity period has expired.
+The temporary file you requested has been deleted because its time limit expired.
+আপনার অনুরোধ করা অস্থায়ী ফাইলটির মেয়াদ শেষ হয়ে যাওয়ায় এটি মুছে ফেলা হয়েছে।
 
-🔄 **ফাইলিটি আবার পেতে নিচের বাটনে ক্লিক করুন।**
 🔄 **To get the file again, click the button below.**
-
-ধন্যবাদ! / Thank you!
+🔄 **ফাইলটি পুনরায় পেতে, নিচের বাটনে ক্লিক করুন।**
 """
         await client.send_message(
             chat_id=chat_id,
@@ -86,7 +85,7 @@ The temporary file you requested has been automatically deleted as its validity 
             reply_markup=InlineKeyboardMarkup([
                 [
                     InlineKeyboardButton(
-                        "🔄 Get Your File Again / আবার ফাইল পান 🔄",
+                        "🔄 Get Your File Again",
                         callback_data=f"resend_{file_id}"
                     )
                 ]
@@ -95,6 +94,30 @@ The temporary file you requested has been automatically deleted as its validity 
 
     except Exception as e:
         logger.error(f"Error in send_and_schedule_deletion for user {chat_id}: {e}")
+
+
+# ----------------------------------------------------------------------------------
+# বাটন হ্যান্ডলার: 'আবার ফাইল পান' বাটনের জন্য
+# ----------------------------------------------------------------------------------
+@Client.on_callback_query(filters.regex("^resend_"))
+async def resend_file_handler(client, callback_query):
+    """
+    এই হ্যান্ডলারটি 'resend_<file_id>' ফরম্যাটের বাটন ক্লিক পরিচালনা করে।
+    """
+    _, file_id = callback_query.data.split("_", 1)
+    
+    # ছোট নোটিফিকেশন (শুধু ইংরেজি)
+    await callback_query.answer("Sending your file again...", show_alert=False)
+
+    # বাটন ক্লিক করার পর পুরনো বার্তাটি এডিট করুন (শুধু ইংরেজি)
+    try:
+        await callback_query.edit_message_text("✅ **Done! Your new file has been sent.**")
+    except:
+        pass 
+
+    # মূল helper ফাংশনটি আবার কল করুন
+    await send_and_schedule_deletion(client, callback_query.from_user.id, file_id)
+	
 
 
 # ----------------------------------------------------------------------------------
