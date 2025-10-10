@@ -96,29 +96,6 @@ The temporary file you requested has been deleted because its time limit expired
         logger.error(f"Error in send_and_schedule_deletion for user {chat_id}: {e}")
 
 
-# ----------------------------------------------------------------------------------
-# বাটন হ্যান্ডলার: 'আবার ফাইল পান' বাটনের জন্য
-# ----------------------------------------------------------------------------------
-@Client.on_callback_query(filters.regex("^resend_"))
-async def resend_file_handler(client, callback_query):
-    """
-    এই হ্যান্ডলারটি 'resend_<file_id>' ফরম্যাটের বাটন ক্লিক পরিচালনা করে।
-    """
-    _, file_id = callback_query.data.split("_", 1)
-    
-    # ছোট নোটিফিকেশন (শুধু ইংরেজি)
-    await callback_query.answer("Sending your file again...", show_alert=False)
-
-    # বাটন ক্লিক করার পর পুরনো বার্তাটি এডিট করুন (শুধু ইংরেজি)
-    try:
-        await callback_query.edit_message_text("✅ **Done! Your new file has been sent.**")
-    except:
-        pass 
-
-    # মূল helper ফাংশনটি আবার কল করুন
-    await send_and_schedule_deletion(client, callback_query.from_user.id, file_id)
-	
-
 
 # ----------------------------------------------------------------------------------
 # আপডেট করা Start Command Handler
@@ -276,18 +253,19 @@ async def resend_file_handler(client, callback_query):
     """
     _, file_id = callback_query.data.split("_", 1)
     
-    # ব্যবহারকারীকে জানান যে অনুরোধটি প্রক্রিয়া করা হচ্ছে
-    await callback_query.answer("আপনার ফাইলটি আবার পাঠানো হচ্ছে...", show_alert=False)
+    # ছোট নোটিফিকেশন (শুধু ইংরেজি)
+    await callback_query.answer("Sending your file again...", show_alert=False)
 
-    # ডিলিট হয়ে যাওয়া বার্তাটি এডিট করে জানান যে ফাইল আবার পাঠানো হয়েছে
+    # বাটন ক্লিক করার পর পুরনো বার্তাটি এডিট করুন (শুধু ইংরেজি)
     try:
-        await callback_query.edit_message_text("✅ **আপনার ফাইলটি আবার পাঠানো হয়েছে। পরবর্তী ফাইলটিও ১০ মিনিট পর ডিলিট হয়ে যাবে।**")
+        await callback_query.edit_message_text("✅ **Done! Your new file has been sent.**")
     except:
         pass 
 
     # মূল helper ফাংশনটি আবার কল করুন
     await send_and_schedule_deletion(client, callback_query.from_user.id, file_id)
-	    
+	
+
 @Client.on_callback_query()
 async def cb_handler(client: Client, query: CallbackQuery):
     if query.data == "close_data":
