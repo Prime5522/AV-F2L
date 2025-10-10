@@ -10,27 +10,113 @@ from web.utils.file_properties import get_hash
 from utils import get_readable_time, verify_user, check_token, get_size
 from web.utils import StartTime, __version__
 from plugins.avbot import is_user_joined, av_verification, av_x_verification
-import os
 import json
-import asyncio
 import logging
 
 logger = logging.getLogger(__name__)
-BATCH_FILES = {}  
+BATCH_FILES = {}
 
+# ----------------------------------------------------------------------------------
+# Helper Function: ফাইল পাঠানো এবং স্বয়ংক্রিয়ভাবে ডিলিট করার জন্য
+# ----------------------------------------------------------------------------------
+async def send_and_schedule_deletion(client, chat_id, file_id):
+    """
+    এই ফাংশনটি ফাইল পাঠায়, সতর্কবার্তা দেয়, 
+    ১০ মিনিট পর ডিলিট করে এবং পুনরায় ফাইল পাওয়ার জন্য বাটনসহ চূড়ান্ত বার্তা পাঠায়।
+    """
+    try:
+        # BIN_CHANNEL থেকে আসল বার্তাটি আনুন
+        original_message = await client.get_messages(int(BIN_CHANNEL), int(file_id))
+        media = original_message.document or original_message.video or original_message.audio
+        
+        caption = None
+        if media:
+            file_name = media.file_name or "Unnamed File"
+            caption = FILE_CAPTION.format(CHANNEL, file_name)
+
+        # ১. ফাইলটি ব্যবহারকারীর কাছে পাঠান
+        file_message = await client.copy_message(
+            chat_id=chat_id,
+            from_chat_id=int(BIN_CHANNEL),
+            message_id=int(file_id),
+            caption=caption,
+            protect_content=PROTECT_CONTENT
+        )
+        
+        # ২. সতর্কীকরণ বার্তা পাঠান
+        warning_text = """
+⚠️ 𝐍𝐨𝐭𝐢𝐜𝐞 | বিজ্ঞপ্তি ⚠️
+
+🕒 Tʜɪs ғɪʟᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ ɪɴ 10 ᴍɪɴs.
+🕒 এই ফাইলটি 10 ᴍɪɴs এর মধ্যে স্বয়ংক্রিয়ভাবে মুছে যাবে।
+
+📤 Pʟᴇᴀsᴇ sᴀᴠᴇ ᴏʀ sʜᴀʀᴇ ᴏʀ ғᴏʀᴡᴀʀᴅ ɪᴛ sᴏᴍᴇᴡʜᴇʀᴇ ᴇʟsᴇ.
+📤 মুছে যাওয়ার আগে অনুগ্রহ করে এটি অন্য কোথাও শেয়ার বা ফরোয়ার্ড করে রাখুন।
+"""
+        warning_message = await client.send_message(
+            chat_id=chat_id,
+            text=warning_text,
+            reply_to_message_id=file_message.id
+        )
+
+        # ৩. ১০ মিনিট (৬০০ সেকেন্ড) অপেক্ষা করুন
+        await asyncio.sleep(600)
+
+        # ৪. ফাইল এবং সতর্কবার্তা ডিলিট করুন
+        await client.delete_messages(
+            chat_id=chat_id,
+            message_ids=[file_message.id, warning_message.id]
+        )
+        
+        # ৫. ডিলিট হওয়ার পর চূড়ান্ত বার্তা এবং বাটন পাঠান
+        final_message_text = """
+⏳ **সময় শেষ | Time's Up!** ⏳
+
+আপনার অনুরোধ করা ফাইলটির মেয়াদ শেষ হয়ে যাওয়ায় এটি স্বয়ংক্রিয়ভাবে মুছে ফেলা হয়েছে।
+The temporary file you requested has been automatically deleted as its validity period has expired.
+
+🔄 **ফাইলিটি আবার পেতে নিচের বাটনে ক্লিক করুন।**
+🔄 **To get the file again, click the button below.**
+
+ধন্যবাদ! / Thank you!
+"""
+        await client.send_message(
+            chat_id=chat_id,
+            text=final_message_text,
+            reply_markup=InlineKeyboardMarkup([
+                [
+                    InlineKeyboardButton(
+                        "🔄 Get Your File Again / আবার ফাইল পান 🔄",
+                        callback_data=f"resend_{file_id}"
+                    )
+                ]
+            ])
+        )
+
+    except Exception as e:
+        logger.error(f"Error in send_and_schedule_deletion for user {chat_id}: {e}")
+
+
+# ----------------------------------------------------------------------------------
+# আপডেট করা Start Command Handler
+# ----------------------------------------------------------------------------------
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
     await message.react(emoji="🔥", big=True)
     user_id = message.from_user.id
     mention = message.from_user.mention
     me2 = (await client.get_me()).mention
+    
     if FSUB:
         if not await is_user_joined(client, message):
             return
+            
     if not await db.is_user_exist(user_id):
         await db.add_user(user_id, message.from_user.first_name)
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT.format(me2, user_id, mention))
-    if len(message.command) == 1 or message.command[1] == "start":
+
+    # যদি কমান্ডে কোনো অতিরিক্ত অংশ না থাকে
+    if len(message.command) == 1:
         buttons = [[
             InlineKeyboardButton('➕ 𝗔𝗗𝗗 𝗠𝗘 𝗧𝗢 𝗬𝗢𝗨𝗥 𝗖𝗛𝗔𝗡𝗡𝗘𝗟 ➕', url='http://t.me/File_To_Link_Prime_Bot?startchannel=true')
         ],[
@@ -55,33 +141,17 @@ async def start(client, message):
         )
         return
 
-    # ✅ Handle /start file_<id>
+    # msg variable এখন এখানে সংজ্ঞায়িত করা হয়েছে
     msg = message.command[1]
 
+    # ✅ Handle /start file_<id>
     if msg.startswith("file_"):
         _, file_id = msg.split("_", 1)
+        # নতুন helper ফাংশনটি কল করা হচ্ছে
+        await send_and_schedule_deletion(client, message.from_user.id, file_id)
+        return
 
-        # Get the original message from BIN_CHANNEL
-        original_message = await client.get_messages(int(BIN_CHANNEL), int(file_id))
-
-        # Detect media
-        media = original_message.document or original_message.video or original_message.audio
-        caption = None
-
-        if media:
-            file_name = media.file_name or "Unnamed File"
-            file_size = get_size(media.file_size)
-            caption = FILE_CAPTION.format(CHANNEL, file_name)
-
-        # Send with caption and protect_content
-        return await client.copy_message(
-            chat_id=message.from_user.id,
-            from_chat_id=int(BIN_CHANNEL),
-            message_id=int(file_id),
-            caption=caption,
-            protect_content=PROTECT_CONTENT
-	)
-
+    # ✅ Handle verification links
     if msg.startswith("verify-"):
         try:
             _, userid, token = msg.split("-", 2)
@@ -109,14 +179,16 @@ async def start(client, message):
             )
         else:
             return await message.reply_text("<b>ʟɪɴᴋ ᴇxᴘɪʀᴇᴅ ᴛʀʏ ᴀɢᴀɪɴ...!</b>")
+        return
 
+    # ✅ Handle Batch files
     if msg.startswith("BATCH-"):
         file_id = msg.split("-", 1)[1]
         user_id = message.from_user.id
         if not await db.has_premium_access(user_id):
             verified = await av_x_verification(client, message)
             if not verified:
-                return  # If not verified, exit
+                return
         sts = await message.reply("<b>Please wait...</b>")
         msgs = BATCH_FILES.get(file_id)
         if not msgs:
@@ -130,10 +202,10 @@ async def start(client, message):
                 await sts.edit("❌ FAILED to load file.")
                 logger.exception("Unable to open batch JSON file.")
                 return await client.send_message(LOG_CHANNEL, f"❌ UNABLE TO OPEN FILE: {e}")
-        for msg in msgs:
-            title = msg.get("title")
-            size = get_size(int(msg.get("size", 0)))
-            f_caption = msg.get("caption", "")
+        for msg_data in msgs:
+            title = msg_data.get("title")
+            size = get_size(int(msg_data.get("size", 0)))
+            f_caption = msg_data.get("caption", "")
             if BATCH_FILE_CAPTION:
                 try:
                     f_caption = BATCH_FILE_CAPTION.format(CHANNEL,
@@ -150,7 +222,7 @@ async def start(client, message):
             try:
                 await client.send_cached_media(
                     chat_id=message.from_user.id,
-                    file_id=msg.get("file_id"),
+                    file_id=msg_data.get("file_id"),
                     caption=f_caption,
                     protect_content=BATCH_PROTECT_CONTENT
                 )
@@ -159,18 +231,39 @@ async def start(client, message):
                 logger.warning(f"⏳ FloodWait: {e.x}s")
                 await client.send_cached_media(
                     chat_id=message.from_user.id,
-                    file_id=msg.get("file_id"),
+                    file_id=msg_data.get("file_id"),
                     caption=f_caption,
                     protect_content=BATCH_PROTECT_CONTENT
                 )
             except Exception as e:
                 logger.error(f"❌ Failed to send media: {e}", exc_info=True)
                 continue
-
             await asyncio.sleep(1)
-
         await sts.delete()
         return
+
+
+# ----------------------------------------------------------------------------------
+# বাটন হ্যান্ডলার: 'আবার ফাইল পান' বাটনের জন্য
+# ----------------------------------------------------------------------------------
+@Client.on_callback_query(filters.regex("^resend_"))
+async def resend_file_handler(client, callback_query):
+    """
+    এই হ্যান্ডলারটি 'resend_<file_id>' ফরম্যাটের বাটন ক্লিক পরিচালনা করে।
+    """
+    _, file_id = callback_query.data.split("_", 1)
+    
+    # ব্যবহারকারীকে জানান যে অনুরোধটি প্রক্রিয়া করা হচ্ছে
+    await callback_query.answer("আপনার ফাইলটি আবার পাঠানো হচ্ছে...", show_alert=False)
+
+    # ডিলিট হয়ে যাওয়া বার্তাটি এডিট করে জানান যে ফাইল আবার পাঠানো হয়েছে
+    try:
+        await callback_query.edit_message_text("✅ **আপনার ফাইলটি আবার পাঠানো হয়েছে। পরবর্তী ফাইলটিও ১০ মিনিট পর ডিলিট হয়ে যাবে।**")
+    except:
+        pass 
+
+    # মূল helper ফাংশনটি আবার কল করুন
+    await send_and_schedule_deletion(client, callback_query.from_user.id, file_id)
 	    
 @Client.on_callback_query()
 async def cb_handler(client: Client, query: CallbackQuery):
