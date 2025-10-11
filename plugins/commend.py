@@ -480,27 +480,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await query.answer("✅ Fɪʟᴇ ᴅᴇʟᴇᴛᴇᴅ ꜱᴜᴄᴄᴇꜱꜱғᴜʟʟʏ!", show_alert=True)
         await query.message.edit_text("🗑️ Fɪʟᴇ ʜᴀꜱ ʙᴇᴇɴ ᴅᴇʟᴇᴛᴇᴅ ꜱᴜᴄᴄᴇꜱꜱғᴜʟʟʏ.")
 
-@Client.on_callback_query(filters.regex("source_prime"))
-async def source_info_callback(client, callback_query):
-    await callback_query.message.reply_photo(
-        photo="https://i.postimg.cc/hvFZ93Ct/file-000000004188623081269b2440872960.png",
-        caption=(
-            "**ɴᴏᴛᴇ :**\n\n"
-            "⚠️ ᴛʜɪꜱ ʙᴏᴛ ɪꜱ ᴀɴ ᴘʀɪᴠᴀᴛᴇ ꜱᴏᴜʀᴄᴇ ᴘʀᴏᴊᴇᴄᴛ\n\n"
-            "ᴛʜɪs ʙᴏᴛ ʜᴀs ʟᴀsᴛᴇsᴛ ᴀɴᴅ ᴀᴅᴠᴀɴᴄᴇᴅ ꜰᴇᴀᴛᴜʀᴇs⚡️\n\n"
-            "▸ ᴅᴏɴ'ᴛ ᴡᴏʀʀʏ\n"
-            "▸ ɪꜰ ʏᴏᴜ ᴡᴀɴᴛ ʟɪᴋᴇ ᴛʜɪꜱ ʙᴏᴛ ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ..!\n"
-            "▸ ɪ ᴡɪʟʟ ᴄʀᴇᴀᴛᴇ ᴀ ʙᴏᴛ ꜰᴏʀ ʏᴏᴜ\n\n"
-            "⇒ ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ - <a href='https://t.me/Prime_Admin_Support_ProBot'>♚ ᴀᴅᴍɪɴ ♚</a>"
-        ),
-        reply_markup=InlineKeyboardMarkup([
-            [InlineKeyboardButton("♚ ᴀᴅᴍɪɴ ♚", url="https://t.me/Prime_Admin_Support_ProBot")],
-            [InlineKeyboardButton("• ᴄʟᴏsᴇ •", callback_data="close_data")]
-        ]),
-        parse_mode=enums.ParseMode.HTML
-    )
-    return await callback_query.answer()
-
 
 @Client.on_message(filters.private & filters.command("files"))
 async def list_user_files(client, message: Message):
@@ -579,3 +558,40 @@ async def help(client, message):
         disable_web_page_preview=True, 
         reply_markup=reply_markup
 )
+
+
+@Client.on_callback_query()
+async def cb_handler(client, query):
+    user_id = query.from_user.id
+    if query.data == "closes":
+        try:
+            await query.message.delete()
+        except Exception:
+            await query.answer("⚠️ Cannot delete message.", show_alert=True)
+        return  # exit early
+
+    elif query.data == "source_prime":   # ← নতুন callback_data
+        try:
+            # প্রথমে আগের মেসেজ ডিলিট হবে
+            await query.message.delete()
+        except Exception:
+            pass
+
+        # এখন নতুন করে ছবি + ক্যাপশন পাঠানো হবে
+        await query.message.reply_photo(
+            photo="https://i.postimg.cc/hvFZ93Ct/file-000000004188623081269b2440872960.png",
+            caption=(
+                f"👋 Hello Dear 👋,\n\n"
+                "⚠️ ᴛʜɪꜱ ʙᴏᴛ ɪꜱ ᴀ ᴘʀɪᴠᴀᴛᴇ ꜱᴏᴜʀᴄᴇ ᴘʀᴏᴊᴇᴄᴛ\n\n"
+                "ᴛʜɪs ʙᴏᴛ ʜᴀs ʟᴀsᴛᴇsᴛ ᴀɴᴅ ᴀᴅᴠᴀɴᴄᴇᴅ ꜰᴇᴀᴛᴜʀᴇs⚡️\n"
+                "▸ ɪꜰ ʏᴏᴜ ᴡᴀɴᴛ ꜱᴏᴜʀᴄᴇ ᴄoᴅᴇ oʀ ʟɪᴋᴇ ᴛʜɪꜱ ʙᴏᴛ ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ..!\n"
+                "▸ ɪ ᴡɪʟʟ ᴄʀᴇᴀᴛᴇ ᴀ ʙᴏᴛ ꜰᴏʀ ʏᴏᴜ oʀ ꜱᴏᴜʀᴄᴇ ᴄoᴅᴇ\n"
+                "⇒ ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ - ♚ ᴀᴅᴍɪɴ ♚."
+            ),
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [InlineKeyboardButton("♚ ᴀᴅᴍɪɴ ♚", url="https://t.me/Prime_Admin_Support_ProBot")],
+                    [InlineKeyboardButton("• ᴄʟᴏsᴇ •", callback_data="closes")]
+                ]
+            )
+		)
