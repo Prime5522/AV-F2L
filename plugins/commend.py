@@ -275,13 +275,26 @@ async def resend_file_handler(client, callback_query):
 async def cb_handler(client: Client, query: CallbackQuery):
     if query.data == "close_data":
         await query.message.delete()
+
+    elif query.data == "source_prime":
+        await query.message.delete()
+        await query.message.reply_photo(
+            photo="https://i.postimg.cc/hvFZ93Ct/file-000000004188623081269b2440872960.png",
+            caption="⚠️ Private Source Project info...",
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton("♚ ᴀᴅᴍɪɴ ♚", url="https://t.me/Prime_Admin_Support_ProBot")],
+                [InlineKeyboardButton("• ᴄʟᴏsᴇ •", callback_data="close_data")]
+            ])
+        )
+
     elif query.data == "about":
-        buttons = [[
-	    InlineKeyboardButton('💻 sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ', callback_data="source_prime")
-	],[
-            InlineKeyboardButton('• ʜᴏᴍᴇ •', callback_data='start'),
-	    InlineKeyboardButton('• ᴄʟᴏsᴇ •', callback_data='close_data')
-        ]]
+        buttons = [
+            [InlineKeyboardButton('💻 sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ', callback_data="source_prime")],
+            [
+                InlineKeyboardButton('• ʜᴏᴍᴇ •', callback_data='start'),
+                InlineKeyboardButton('• ᴄʟᴏsᴇ •', callback_data='close_data')
+            ]
+        ]
         reply_markup = InlineKeyboardMarkup(buttons)
         me2 = (await client.get_me()).mention
         await query.message.edit_text(
@@ -567,14 +580,14 @@ async def help(client, message):
 @Client.on_callback_query()
 async def cb_handler_2(client, query):
     user_id = query.from_user.id
-    if query.data == "closes":
+    if query.data == "closes1":
         try:
             await query.message.delete()
         except Exception:
             await query.answer("⚠️ Cannot delete message.", show_alert=True)
         return  # exit early
 
-    elif query.data == "source_prime":   # ← নতুন callback_data
+    elif query.data == "source_prime1":   # ← নতুন callback_data
         try:
             # প্রথমে আগের মেসেজ ডিলিট হবে
             await query.message.delete()
