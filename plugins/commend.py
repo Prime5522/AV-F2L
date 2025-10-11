@@ -46,13 +46,16 @@ async def send_and_schedule_deletion(client, chat_id, file_id):
         
         # ২. সতর্কীকরণ বার্তা (বাংলা ও ইংরেজি)
         warning_text = """
-⚠️ **Notice | বিজ্ঞপ্তি** ⚠️
+⚠️ **Important Notice | বিজ্ঞপ্তি** ⚠️
 
-🕒 This file will be automatically deleted in **10 minutes**.
-🕒 এই ফাইলটি **১০ মিনিটের** মধ্যে স্বয়ংক্রিয়ভাবে মুছে যাবে।
+⚠️ This movie file/video will be automatically deleted within 10 minutes ⏳ due to copyright issues.
+⚠️ এই মুভি ফাইল/ভিডিওটি কপিরাইট সমস্যার কারণে ১০ মিনিটের মধ্যে স্বয়ংক্রিয়ভাবে মুছে ফেলা হবে ⏳
 
-📤 Please save or forward it somewhere else before it gets deleted.
-📤 মুছে যাওয়ার আগে অনুগ্রহ করে এটি অন্য কোথাও সেভ বা ফরোয়ার্ড করে রাখুন।
+📤 Please forward this file/video anywhere right now and start downloading from there to keep a copy before it’s gone!
+📤 অবিলম্বে এই ফাইল/ভিডিওটি ফরওয়ার্ড করুন এবং সেখান থেকে ডাউনলোড শুরু করুন!
+
+💬 Thank you for using our service!
+💬 আমাদের সেবা ব্যবহারের জন্য ধন্যবাদ! 🤝
 """
         warning_message = await client.send_message(
             chat_id=chat_id,
@@ -73,11 +76,13 @@ async def send_and_schedule_deletion(client, chat_id, file_id):
         final_message_text = """
 ⏳ **Time's Up! | সময় শেষ!** ⏳
 
-The temporary file you requested has been deleted because its time limit expired.
-আপনার অনুরোধ করা অস্থায়ী ফাইলটির মেয়াদ শেষ হয়ে যাওয়ায় এটি মুছে ফেলা হয়েছে।
+⚠️ File Deleted Successfully Due to Copyright Issues!
 
-🔄 **To get the file again, click the button below.**
-🔄 **ফাইলটি পুনরায় পেতে, নিচের বাটনে ক্লিক করুন।**
+📂 **Tap Below to Restore or Access Your File Instantly 👇**
+
+🔐 This action is protected by our Auto-Secure System
+🕒 Restored files remain available for a limited time.
+💬 Thank you for using our service! 🤝
 """
         await client.send_message(
             chat_id=chat_id,
