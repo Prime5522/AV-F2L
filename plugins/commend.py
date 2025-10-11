@@ -469,24 +469,11 @@ async def cb_handler(client: Client, query: CallbackQuery):
         if not file_data:
             return await query.answer("⚠️ Nᴏ ᴍᴏʀᴇ ғɪʟᴇꜱ.", show_alert=True)
         try:
-            original_message = await client.get_messages(BIN_CHANNEL, file_id)
-            media = original_message.document or original_message.video or original_message.audio
-            caption = None
-            if media:
-                file_name = media.file_name or "Unnamed"
-                file_size = get_size(media.file_size)
-                caption = FILE_CAPTION.format(CHANNEL, file_name)
-            await client.copy_message(
-                chat_id=user_id,
-                from_chat_id=BIN_CHANNEL,
-                message_id=file_id,
-                caption=caption,
-                protect_content=PROTECT_CONTENT
-            )
-            return await query.answer()
-        except Exception:
-            return await query.answer("⚠️ Failed to send file.", show_alert=True)
-		
+            # 🔥 এখন send_and_schedule_deletion ফাংশন দিয়ে ফাইল পাঠানো হবে
+            await send_and_schedule_deletion(client, user_id, file_id)
+        except Exception as e:
+            return await query.answer(f"⚠️ Failed to send file: {e}", show_alert=True)
+        
     elif query.data.startswith("deletefile_"):
         file_msg_id = int(query.data.split("_")[1])
         user_id = query.from_user.id
