@@ -384,6 +384,20 @@ async def cb_handler(client: Client, query: CallbackQuery):
             parse_mode=enums.ParseMode.HTML
 	)
 
+	elif query.data == "source_prime":
+        await query.message.delete()
+        await query.message.reply_photo(
+            photo="https://i.postimg.cc/hvFZ93Ct/file-000000004188623081269b2440872960.png",
+            caption="⚠️ Private Source Project info...",
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton("♚ ᴀᴅᴍɪɴ ♚", url="https://t.me/Prime_Admin_Support_ProBot")],
+                [InlineKeyboardButton("• ᴄʟᴏsᴇ •", callback_data="closes")]
+            ])
+        )
+
+    elif query.data == "closes":
+        await query.message.delete()
+
     # ⏩ Pagination: Next/Back
     elif query.data.startswith("filespage_"):
         page = int(query.data.split("_")[1])
@@ -547,51 +561,18 @@ async def about(client, message):
     )
 
  
+#from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+
 @Client.on_message(filters.command("help"))
 async def help(client, message):
-    btn = [[
-       InlineKeyboardButton('• ᴄʟᴏsᴇ •', callback_data='close_data')
-    ]]
+    btn = [
+        [InlineKeyboardButton('💻 sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ', callback_data="source_prime")],  # উপরের বাটন
+        [InlineKeyboardButton('• ᴄʟᴏsᴇ •', callback_data='close_data')]  # নিচের বাটন
+    ]
     reply_markup = InlineKeyboardMarkup(btn)
     await message.reply_text(
         text=script.HELP2_TXT,
-        disable_web_page_preview=True, 
+        disable_web_page_preview=True,
         reply_markup=reply_markup
-)
-
-
-@Client.on_callback_query()
-async def cb_handler(client, query):
-    user_id = query.from_user.id
-    if query.data == "closes":
-        try:
-            await query.message.delete()
-        except Exception:
-            await query.answer("⚠️ Cannot delete message.", show_alert=True)
-        return  # exit early
-
-    elif query.data == "source_prime":   # ← নতুন callback_data
-        try:
-            # প্রথমে আগের মেসেজ ডিলিট হবে
-            await query.message.delete()
-        except Exception:
-            pass
-
-        # এখন নতুন করে ছবি + ক্যাপশন পাঠানো হবে
-        await query.message.reply_photo(
-            photo="https://i.postimg.cc/hvFZ93Ct/file-000000004188623081269b2440872960.png",
-            caption=(
-                f"👋 Hello Dear 👋,\n\n"
-                "⚠️ ᴛʜɪꜱ ʙᴏᴛ ɪꜱ ᴀ ᴘʀɪᴠᴀᴛᴇ ꜱᴏᴜʀᴄᴇ ᴘʀᴏᴊᴇᴄᴛ\n\n"
-                "ᴛʜɪs ʙᴏᴛ ʜᴀs ʟᴀsᴛᴇsᴛ ᴀɴᴅ ᴀᴅᴠᴀɴᴄᴇᴅ ꜰᴇᴀᴛᴜʀᴇs⚡️\n"
-                "▸ ɪꜰ ʏᴏᴜ ᴡᴀɴᴛ ꜱᴏᴜʀᴄᴇ ᴄoᴅᴇ oʀ ʟɪᴋᴇ ᴛʜɪꜱ ʙᴏᴛ ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ..!\n"
-                "▸ ɪ ᴡɪʟʟ ᴄʀᴇᴀᴛᴇ ᴀ ʙᴏᴛ ꜰᴏʀ ʏᴏᴜ oʀ ꜱᴏᴜʀᴄᴇ ᴄoᴅᴇ\n"
-                "⇒ ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ - ♚ ᴀᴅᴍɪɴ ♚."
-            ),
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [InlineKeyboardButton("♚ ᴀᴅᴍɪɴ ♚", url="https://t.me/Prime_Admin_Support_ProBot")],
-                    [InlineKeyboardButton("• ᴄʟᴏsᴇ •", callback_data="closes")]
-                ]
-            )
 		)
+
