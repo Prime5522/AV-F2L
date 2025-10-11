@@ -280,7 +280,16 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await query.message.delete()
         await query.message.reply_photo(
             photo="https://i.postimg.cc/hvFZ93Ct/file-000000004188623081269b2440872960.png",
-            caption="⚠️ Private Source Project info...",
+            caption="""👋 Hello Dear 👋
+
+⚠️ ᴛʜɪꜱ ʙᴏᴛ ɪꜱ ᴀ ᴘʀɪᴠᴀᴛᴇ ꜱᴏᴜʀᴄᴇ ᴘʀᴏᴊᴇᴄᴛ
+
+ᴛʜɪs ʙᴏᴛ ʜᴀs ʟᴀᴛᴇsᴛ ᴀɴᴅ ᴀᴅᴠᴀɴᴄᴇᴅ ꜰᴇᴀᴛᴜʀᴇs⚡️
+
+▸ ɪꜰ ʏᴏᴜ ᴡᴀɴᴛ ꜱᴏᴜʀᴄᴇ ᴄᴏᴅᴇ oʀ ʟɪᴋᴇ ᴛʜɪꜱ ʙᴏᴛ, ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ..!
+▸ ɪ ᴡɪʟʟ ᴄʀᴇᴀᴛᴇ ᴀ ʙᴏᴛ ꜰᴏʀ ʏᴏᴜ oʀ ꜱᴏᴜʀᴄᴇ ᴄᴏᴅᴇ
+
+⇒ ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ - ♚ ᴀᴅᴍɪɴ ♚""",
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton("♚ ᴀᴅᴍɪɴ ♚", url="https://t.me/Prime_Admin_Support_ProBot")],
                 [InlineKeyboardButton("• ᴄʟᴏsᴇ •", callback_data="close_data")]
@@ -301,7 +310,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             text=script.ABOUT_TXT.format(me2, me2, get_readable_time(time.time() - StartTime), __version__),
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
-        )
+	)
     
     elif query.data == "start":
         buttons = [[
